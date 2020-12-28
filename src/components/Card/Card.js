@@ -2,6 +2,15 @@ import React from 'react'
 import '../../assets/card.styles.css'
 const Card = (props) => {
   let { monster } = props
-  return <h1 className={'card-container'}>{monster.name}</h1>
+  return (
+    <div className={'card-container'}>
+      <img
+        alt={'monster'}
+        src={`https://robohash.org/${monster.id}?set=set2&size=180x180`}
+      />
+      <h2>{monster.name}</h2>
+      <p>{monster.email}</p>
+    </div>
+  )
 }
 export default Card

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import './assets/App.css'
 import { fetchUsers } from './api/user.api'
 import CardList from './components/CardList/CardList'
+import SearchBox from './components/SearchBox/SearchBox'
 
 function App() {
   let [monsters, setMonsters] = useState([])
-  let [searchFiled, setSearchField] = useState([])
+  let [searchFiled, setSearchField] = useState('')
+
   useEffect(() => {
     fetchUsers().then(
       (res) => {
@@ -16,8 +18,25 @@ function App() {
       }
     )
   }, [])
+
+  const handleChange = (e) => {
+    setSearchField(e.target.value)
+  }
+
+  const filteredMonsters = monsters.filter((monster) =>
+    monster.name.toLowerCase().includes(searchFiled.toLowerCase())
+  )
+
   return (
-    <div className="App">{monsters && <CardList monsters={monsters} />}</div>
+    <div className="App">
+      <h1>Monsters Inc.</h1>
+      <SearchBox
+        placeholder={'Search Monsters'}
+        handleChange={handleChange}
+        value={searchFiled}
+      />
+      {monsters && <CardList monsters={filteredMonsters} />}
+    </div>
   )
 }
 
