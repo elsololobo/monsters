@@ -29,6 +29,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Monsters Inc.</h1>
       <SearchBox
         placeholder={'Search Monsters'}
         handleChange={handleChange}
